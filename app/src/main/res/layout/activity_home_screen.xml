@@ -3,60 +3,97 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#80dfff"
+    android:fitsSystemWindows="true"
     tools:context="com.chessticker.nitinmehta.chessticker.HomeScreenActivity">
 
     <LinearLayout
+        android:id="@+id/topLayout"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorAccent">
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/customborder">
 
         <TextView
-            android:text="00:00:00"
             android:id="@+id/watch2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50dp"
-            android:textStyle="bold"
-            android:textColor="#009688"
-            android:textAlignment="center"
-            android:layout_marginLeft="20dp"/>
+            android:rotation="180"
+            android:textColor="#07aec1"
+            android:textSize="80dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary">
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/customborder"
+        android:orientation="horizontal">
 
-        <TextView
-            android:text="00:00:00"
-            android:id="@+id/watch1"
+        <Button
+            android:id="@+id/buttonStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50dp"
-            android:textStyle="bold"
-            android:textColor="#009688"
-            android:textAlignment="center"
-            android:layout_marginLeft="20dp"/>
+            android:layout_margin="16dp"
+            android:textSize="20dp"
+            android:background="@drawable/customborder"
+            android:text="@string/start" />
 
+        <Button
+            android:id="@+id/buttonStop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textSize="20dp"
+            android:background="@drawable/customborder"
+            android:text="@string/stop" />
+
+        <Button
+            android:id="@+id/buttonResume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textSize="20dp"
+            android:background="@drawable/customborder"
+            android:text="@string/reset" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/colorAccent"
-        android:layout_marginTop="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/customborder">
+
+        <TextView
+            android:id="@+id/watch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="00:00:00"
+            android:textColor="#07aec1"
+            android:textSize="80dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </LinearLayout>
