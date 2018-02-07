@@ -17,6 +17,7 @@ public class HomeScreenActivity extends Activity {
     private TextView textView1, textView2;
     private LinearLayout topTimerLayout, bottomTimerLayout;
     private Button startButton, stopButton, resetButton;
+    private boolean isTimeRunning = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +40,14 @@ public class HomeScreenActivity extends Activity {
         bottomTimerLayout.setEnabled(false);
 
         //Display time on start of application
-        final String initialTime = "00:12:00";
+        final String initialTime = "00:06:00";
         textView1.setText(initialTime);
         textView2.setText(initialTime);
-        final CounterClass bottomTimer = new CounterClass(720000,1000);
-        final CounterClass topTimer = new CounterClass(720000,1000);
+
+        final BottomCounterClass bottomTimer = new BottomCounterClass(360000,1000);
+        final TopCounterClass topTimer = new TopCounterClass(360000,1000);
+
+
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -55,6 +59,7 @@ public class HomeScreenActivity extends Activity {
                 topTimerLayout.setEnabled(false);
                 bottomTimerLayout.setEnabled(true);
                 bottomTimer.start();
+                isTimeRunning = true;
 
             }
         });
@@ -69,6 +74,7 @@ public class HomeScreenActivity extends Activity {
                 bottomTimerLayout.setEnabled(false);
                 bottomTimer.cancel();
                 topTimer.cancel();
+                isTimeRunning = false;
             }
         });
 
@@ -85,6 +91,7 @@ public class HomeScreenActivity extends Activity {
                 topTimer.cancel();
                 textView1.setText(initialTime);
                 textView2.setText(initialTime);
+                isTimeRunning = false;
             }
         });
 
@@ -92,9 +99,15 @@ public class HomeScreenActivity extends Activity {
         bottomTimerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                bottomTimer.pause();
-//                topTimer.start();
-
+                bottomTimerLayout.setEnabled(false);
+                topTimerLayout.setEnabled(true);
+                bottomTimer.pause();
+                if(isTimeRunning) {
+                    topTimer.start();
+                    isTimeRunning = false;
+                } else {
+                    topTimer.resume();
+                }
             }
         });
 
@@ -102,19 +115,22 @@ public class HomeScreenActivity extends Activity {
         topTimerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                topTimer.pause();
-//                bottomTimer.resume();
+                topTimerLayout.setEnabled(false);
+                bottomTimerLayout.setEnabled(true);
+                topTimer.pause();
+                bottomTimer.resume();
             }
         });
     }
 
-    public class CounterClass extends CountDownTimer {
+    //CountDownTimer class for bottom layout
+    public class BottomCounterClass extends AdvanceCountDownTimer {
 
-        private long startPauseTime;
-        private long pauseTime = 0L;
-
-        public CounterClass(long millisInFuture, long countDownInterval) {
+        private long millisLeft = 0;
+        CountDownTimer countDownTimer = null;
+        public BottomCounterClass(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
+            this.millisLeft = millisInFuture;
         }
 
         @Override
@@ -126,7 +142,7 @@ public class HomeScreenActivity extends Activity {
                     TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
             System.out.println(hms);
             textView1.setText(hms);
-            textView2.setText(hms);
+            millisLeft = millisUntilFinished;
         }
 
         @Override
@@ -134,15 +150,52 @@ public class HomeScreenActivity extends Activity {
 
         }
 
-        public void pause() {
-//            startPauseTime = System.currentTimeMillis();
-            
-
+        @Override
+        public long pause() {
+            return super.pause();
         }
 
-        public void resume() {
-//            pauseTime += System.currentTimeMillis() - startPauseTime;
+        @Override
+        public long resume() {
+            return super.resume();
         }
     }
 
+    //CountDownTimer class for top layout
+    public class TopCounterClass extends AdvanceCountDownTimer {
+
+        private long millisLeft = 0;
+        public TopCounterClass(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+            this.millisLeft = millisInFuture;
+        }
+
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            long millis = millisUntilFinished;
+            String hms = String.format("%02d:%02d:%02d",
+                    TimeUnit.MILLISECONDS.toHours(millis),
+                    TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                    TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+            System.out.println(hms);
+            textView2.setText(hms);
+            millisLeft = millisUntilFinished;
+        }
+
+        @Override
+        public void onFinish() {
+
+        }
+
+        @Override
+        public long pause() {
+            return super.pause();
+        }
+
+        @Override
+        public long resume() {
+            return super.resume();
+        }
+    }
 }
