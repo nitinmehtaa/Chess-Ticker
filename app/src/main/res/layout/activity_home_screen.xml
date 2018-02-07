@@ -11,6 +11,7 @@
 
     <LinearLayout
         android:id="@+id/topLayout"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="16dp"
@@ -18,7 +19,7 @@
         android:layout_marginTop="15dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:background="@drawable/customborder">
+        android:background="@drawable/customborder_gray_background">
 
         <TextView
             android:id="@+id/watch2"
@@ -40,7 +41,7 @@
         android:layout_marginTop="15dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:background="@drawable/customborder"
+        android:background="@drawable/customborder_gray_background"
         android:orientation="horizontal">
 
         <Button
@@ -49,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:textSize="20dp"
-            android:background="@drawable/customborder"
+            android:background="@drawable/customborder_gray_background"
             android:text="@string/start" />
 
         <Button
@@ -58,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:textSize="20dp"
-            android:background="@drawable/customborder"
+            android:background="@drawable/customborder_gray_background"
             android:text="@string/stop" />
 
         <Button
@@ -67,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:textSize="20dp"
-            android:background="@drawable/customborder"
+            android:background="@drawable/customborder_gray_background"
             android:text="@string/reset" />
 
     </LinearLayout>
@@ -82,7 +83,7 @@
         android:layout_marginTop="15dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:background="@drawable/customborder">
+        android:background="@drawable/customborder_gray_background">
 
         <TextView
             android:id="@+id/watch1"

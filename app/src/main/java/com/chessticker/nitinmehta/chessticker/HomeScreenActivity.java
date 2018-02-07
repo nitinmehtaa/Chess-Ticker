@@ -1,14 +1,16 @@
 package com.chessticker.nitinmehta.chessticker;
 
 import android.app.Activity;
-import android.os.Handler;
-import android.os.SystemClock;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.os.CountDownTimer;
+import android.widget.Toast;
+
 import java.util.concurrent.TimeUnit;
 
 
@@ -18,6 +20,7 @@ public class HomeScreenActivity extends Activity {
     private LinearLayout topTimerLayout, bottomTimerLayout;
     private Button startButton, stopButton, resetButton;
     private boolean isTimeRunning = true;
+    final String initialTime = "00:06:00";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +43,11 @@ public class HomeScreenActivity extends Activity {
         bottomTimerLayout.setEnabled(false);
 
         //Display time on start of application
-        final String initialTime = "00:06:00";
         textView1.setText(initialTime);
         textView2.setText(initialTime);
 
         final BottomCounterClass bottomTimer = new BottomCounterClass(360000,1000);
         final TopCounterClass topTimer = new TopCounterClass(360000,1000);
-
-
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -60,6 +60,7 @@ public class HomeScreenActivity extends Activity {
                 bottomTimerLayout.setEnabled(true);
                 bottomTimer.start();
                 isTimeRunning = true;
+                bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
 
             }
         });
@@ -75,6 +76,8 @@ public class HomeScreenActivity extends Activity {
                 bottomTimer.cancel();
                 topTimer.cancel();
                 isTimeRunning = false;
+                topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
+                bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
             }
         });
 
@@ -92,6 +95,8 @@ public class HomeScreenActivity extends Activity {
                 textView1.setText(initialTime);
                 textView2.setText(initialTime);
                 isTimeRunning = false;
+                topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
+                bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
             }
         });
 
@@ -102,11 +107,14 @@ public class HomeScreenActivity extends Activity {
                 bottomTimerLayout.setEnabled(false);
                 topTimerLayout.setEnabled(true);
                 bottomTimer.pause();
+                bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
                 if(isTimeRunning) {
                     topTimer.start();
+                    topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                     isTimeRunning = false;
                 } else {
                     topTimer.resume();
+                    topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                 }
             }
         });
@@ -119,12 +127,21 @@ public class HomeScreenActivity extends Activity {
                 bottomTimerLayout.setEnabled(true);
                 topTimer.pause();
                 bottomTimer.resume();
+                topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
+                if(isTimeRunning) {
+                    bottomTimer.start();
+                    bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
+                    isTimeRunning = false;
+                } else {
+                    bottomTimer.resume();
+                    bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
+                }
             }
         });
     }
 
     //CountDownTimer class for bottom layout
-    public class BottomCounterClass extends AdvanceCountDownTimer {
+    public class BottomCounterClass extends CustomCountDownTimer {
 
         private long millisLeft = 0;
         CountDownTimer countDownTimer = null;
@@ -147,7 +164,11 @@ public class HomeScreenActivity extends Activity {
 
         @Override
         public void onFinish() {
-
+            Vibrator v = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(500);
+            Toast.makeText(HomeScreenActivity.this, "Game Over! Player 2 Wins", Toast.LENGTH_SHORT).show();
+            textView1.setText(initialTime);
+            textView2.setText(initialTime);
         }
 
         @Override
@@ -162,7 +183,7 @@ public class HomeScreenActivity extends Activity {
     }
 
     //CountDownTimer class for top layout
-    public class TopCounterClass extends AdvanceCountDownTimer {
+    public class TopCounterClass extends CustomCountDownTimer {
 
         private long millisLeft = 0;
         public TopCounterClass(long millisInFuture, long countDownInterval) {
@@ -185,7 +206,11 @@ public class HomeScreenActivity extends Activity {
 
         @Override
         public void onFinish() {
-
+            Vibrator v = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(500);
+            Toast.makeText(HomeScreenActivity.this, "Game Over! Player 1 Wins", Toast.LENGTH_SHORT).show();
+            textView1.setText(initialTime);
+            textView2.setText(initialTime);
         }
 
         @Override

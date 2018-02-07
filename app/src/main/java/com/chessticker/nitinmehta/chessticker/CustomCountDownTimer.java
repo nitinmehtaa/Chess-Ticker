@@ -3,11 +3,12 @@ package com.chessticker.nitinmehta.chessticker;
 /**
  * Created by NitinMehta on 07/02/2018.
  */
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.os.Message;
 
-public abstract class AdvanceCountDownTimer {
+public abstract class CustomCountDownTimer {
     /**
      * Millis since epoch when alarm should stop.
      */
@@ -33,7 +34,7 @@ public abstract class AdvanceCountDownTimer {
      * @param countDownInterval The interval along the way to receive
      *   {@link #onTick(long)} callbacks.
      */
-    public AdvanceCountDownTimer(long millisInFuture, long countDownInterval) {
+    public CustomCountDownTimer(long millisInFuture, long countDownInterval) {
         mMillisInFuture = millisInFuture;
         mCountdownInterval = countDownInterval;
     }
@@ -51,7 +52,7 @@ public abstract class AdvanceCountDownTimer {
     /**
      * Start the countdown.
      */
-    public synchronized final AdvanceCountDownTimer start() {
+    public synchronized final CustomCountDownTimer start() {
         if (mMillisInFuture <= 0) {
             onFinish();
             return this;
@@ -103,7 +104,7 @@ public abstract class AdvanceCountDownTimer {
         @Override
         public void handleMessage(Message msg) {
 
-            synchronized (AdvanceCountDownTimer.this) {
+            synchronized (CustomCountDownTimer.this) {
                 if (!mPaused) {
                     final long millisLeft = mStopTimeInFuture - SystemClock.elapsedRealtime();
 
