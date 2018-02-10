@@ -1,11 +1,14 @@
 package com.chessticker.nitinmehta.chessticker;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.os.CountDownTimer;
@@ -18,7 +21,7 @@ public class HomeScreenActivity extends Activity {
 
     private TextView textView1, textView2;
     private LinearLayout topTimerLayout, bottomTimerLayout;
-    private Button startButton, stopButton, resetButton;
+    private Button startButton, stopButton, resetButton, buttonEnterTime;
     private boolean isTimeRunning = true;
     final String initialTime = "00:06:00";
 
@@ -26,14 +29,7 @@ public class HomeScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
-        textView1 = (TextView) findViewById(R.id.watch1);
-        textView2 = (TextView) findViewById(R.id.watch2);
-        startButton = (Button) findViewById(R.id.buttonStart);
-        stopButton = (Button) findViewById(R.id.buttonStop);
-        resetButton = (Button) findViewById(R.id.buttonResume);
-        topTimerLayout = (LinearLayout) findViewById(R.id.topLayout);
-        bottomTimerLayout = (LinearLayout) findViewById(R.id.bottomLayout);
+        findViews();
 
         //Buttons state on start of Application
         startButton.setEnabled(true);
@@ -41,6 +37,7 @@ public class HomeScreenActivity extends Activity {
         resetButton.setEnabled(false);
         topTimerLayout.setEnabled(false);
         bottomTimerLayout.setEnabled(false);
+        buttonEnterTime.setEnabled(true);
 
         //Display time on start of application
         textView1.setText(initialTime);
@@ -53,6 +50,7 @@ public class HomeScreenActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+                buttonEnterTime.setEnabled(false);
                 startButton.setEnabled(false);
                 stopButton.setEnabled(true);
                 resetButton.setEnabled(true);
@@ -138,6 +136,50 @@ public class HomeScreenActivity extends Activity {
                 }
             }
         });
+
+        buttonEnterTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEditTimeDialog();
+            }
+        });
+    }
+
+    private void findViews(){
+        textView1 = (TextView) findViewById(R.id.watch1);
+        textView2 = (TextView) findViewById(R.id.watch2);
+        startButton = (Button) findViewById(R.id.buttonStart);
+        stopButton = (Button) findViewById(R.id.buttonStop);
+        resetButton = (Button) findViewById(R.id.buttonResume);
+        topTimerLayout = (LinearLayout) findViewById(R.id.topLayout);
+        bottomTimerLayout = (LinearLayout) findViewById(R.id.bottomLayout);
+        buttonEnterTime = (Button) findViewById(R.id.button_enter_time);
+
+    }
+
+    private void showEditTimeDialog(){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        View mView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
+        final EditText setTime = (EditText) mView.findViewById(R.id.edit_text);
+        Button setTimeButton = (Button) mView.findViewById(R.id.button_set_time);
+
+        setTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!setTime.getText().toString().isEmpty()) {
+                    Toast.makeText(HomeScreenActivity.this,
+                            "Time Updated",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(HomeScreenActivity.this,
+                            "Please enter Minutes",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        mBuilder.setView(mView);
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
     }
 
     //CountDownTimer class for bottom layout
