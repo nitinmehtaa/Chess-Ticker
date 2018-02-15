@@ -19,11 +19,66 @@ import java.util.concurrent.TimeUnit;
 
 public class HomeScreenActivity extends Activity {
 
+    TopCounterClass topTimer;
+    BottomCounterClass bottomTimer;
+
     private TextView textView1, textView2;
     private LinearLayout topTimerLayout, bottomTimerLayout;
     private Button startButton, stopButton, resetButton, buttonEnterTime;
     private boolean isTimeRunning = true;
-    final String initialTime = "00:06:00";
+    public final int INITIAL_TIME_IN_MINUTES = 6;
+    public String initialTime;
+    public long currentStartTime = 6;
+
+    //Convert minutes into HH:MM:SS Format
+    private String convertTime(long time) {
+        String finalTime = "";
+        long hour = (time%(24*60)) / 60;
+        long minutes = (time%(24*60)) % 60;
+        long seconds = time / (24*3600);
+
+        finalTime = String.format("%02d:%02d:%02d",
+                TimeUnit.HOURS.toHours(hour) ,
+                TimeUnit.MINUTES.toMinutes(minutes),
+                TimeUnit.SECONDS.toSeconds(seconds));
+        return finalTime;
+    }
+
+    //Dialog to set Time
+    private void showEditTimeDialog(){
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        View mView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
+        final EditText setTime = (EditText) mView.findViewById(R.id.edit_text);
+        Button setTimeButton = (Button) mView.findViewById(R.id.button_set_time);
+
+        setTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!setTime.getText().toString().isEmpty()) {
+                    currentStartTime = Long.parseLong(setTime.getText().toString());
+                    String finalTimeTobeShown = convertTime(currentStartTime);
+                    textView1.setText(finalTimeTobeShown);
+                    textView2.setText(finalTimeTobeShown);
+                    Toast.makeText(HomeScreenActivity.this,
+                            "Time Updated",
+                            Toast.LENGTH_SHORT).show();
+                    resetTimers();
+                } else {
+                    Toast.makeText(HomeScreenActivity.this,
+                            "Please enter Minutes",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        mBuilder.setView(mView);
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
+    }
+
+    private void resetTimers() {
+        bottomTimer = new BottomCounterClass(currentStartTime * 60000,1000);
+        topTimer = new TopCounterClass(currentStartTime * 60000,1000);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +95,12 @@ public class HomeScreenActivity extends Activity {
         buttonEnterTime.setEnabled(true);
 
         //Display time on start of application
+        initialTime = convertTime(INITIAL_TIME_IN_MINUTES);
         textView1.setText(initialTime);
         textView2.setText(initialTime);
 
-        final BottomCounterClass bottomTimer = new BottomCounterClass(360000,1000);
-        final TopCounterClass topTimer = new TopCounterClass(360000,1000);
+        bottomTimer = new BottomCounterClass(360000,1000);
+        topTimer = new TopCounterClass(360000,1000);
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -71,6 +127,7 @@ public class HomeScreenActivity extends Activity {
                 resetButton.setEnabled(true);
                 topTimerLayout.setEnabled(false);
                 bottomTimerLayout.setEnabled(false);
+                buttonEnterTime.setEnabled(true);
                 bottomTimer.cancel();
                 topTimer.cancel();
                 isTimeRunning = false;
@@ -88,6 +145,7 @@ public class HomeScreenActivity extends Activity {
                 resetButton.setEnabled(false);
                 topTimerLayout.setEnabled(false);
                 bottomTimerLayout.setEnabled(false);
+                buttonEnterTime.setEnabled(true);
                 bottomTimer.cancel();
                 topTimer.cancel();
                 textView1.setText(initialTime);
@@ -154,39 +212,12 @@ public class HomeScreenActivity extends Activity {
         topTimerLayout = (LinearLayout) findViewById(R.id.topLayout);
         bottomTimerLayout = (LinearLayout) findViewById(R.id.bottomLayout);
         buttonEnterTime = (Button) findViewById(R.id.button_enter_time);
-
-    }
-
-    private void showEditTimeDialog(){
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-        View mView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
-        final EditText setTime = (EditText) mView.findViewById(R.id.edit_text);
-        Button setTimeButton = (Button) mView.findViewById(R.id.button_set_time);
-
-        setTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!setTime.getText().toString().isEmpty()) {
-                    Toast.makeText(HomeScreenActivity.this,
-                            "Time Updated",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(HomeScreenActivity.this,
-                            "Please enter Minutes",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        mBuilder.setView(mView);
-        AlertDialog dialog = mBuilder.create();
-        dialog.show();
     }
 
     //CountDownTimer class for bottom layout
     public class BottomCounterClass extends CustomCountDownTimer {
 
         private long millisLeft = 0;
-        CountDownTimer countDownTimer = null;
         public BottomCounterClass(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
             this.millisLeft = millisInFuture;
@@ -199,7 +230,6 @@ public class HomeScreenActivity extends Activity {
                     TimeUnit.MILLISECONDS.toHours(millis),
                     TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
                     TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-            System.out.println(hms);
             textView1.setText(hms);
             millisLeft = millisUntilFinished;
         }
@@ -228,11 +258,11 @@ public class HomeScreenActivity extends Activity {
     public class TopCounterClass extends CustomCountDownTimer {
 
         private long millisLeft = 0;
+
         public TopCounterClass(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
             this.millisLeft = millisInFuture;
         }
-
 
         @Override
         public void onTick(long millisUntilFinished) {
