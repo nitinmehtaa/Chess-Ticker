@@ -2,6 +2,8 @@ package com.chessticker.nitinmehta.chessticker;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -50,6 +52,7 @@ public class HomeScreenActivity extends Activity {
         View mView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
         final EditText setTime = (EditText) mView.findViewById(R.id.edit_text);
         Button setTimeButton = (Button) mView.findViewById(R.id.button_set_time);
+        final AlertDialog dialog = mBuilder.create();
 
         setTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +66,7 @@ public class HomeScreenActivity extends Activity {
                             "Time Updated",
                             Toast.LENGTH_SHORT).show();
                     resetTimers();
+                    dialog.cancel();
                 } else {
                     Toast.makeText(HomeScreenActivity.this,
                             "Please enter Minutes",
@@ -71,7 +75,6 @@ public class HomeScreenActivity extends Activity {
             }
         });
         mBuilder.setView(mView);
-        AlertDialog dialog = mBuilder.create();
         dialog.show();
     }
 
