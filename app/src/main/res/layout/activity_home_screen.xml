@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#80dfff"
+    android:background="#3e4444"
     android:fitsSystemWindows="true"
     tools:context="com.chessticker.nitinmehta.chessticker.HomeScreenActivity">
 
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:rotation="180"
-            android:textColor="#07aec1"
+            android:textColor="#333333"
             android:textSize="80dp"
             android:textStyle="bold" />
 
@@ -40,39 +40,56 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="15dp"
         android:layout_weight="1"
-        android:background="@drawable/customborder_gray_background"
+        android:background="#3e4444"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:textSize="20dp"
-            android:background="@drawable/customborder_gray_background"
-            android:text="@string/start" />
+            android:background="@drawable/round_button_start"
+            android:text="@string/start"
+            android:textColor="#ffffff"
+            android:layout_marginHorizontal="12dp"
+            android:layout_gravity="center_vertical"/>
 
         <Button
             android:id="@+id/buttonStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:textSize="20dp"
-            android:background="@drawable/customborder_gray_background"
-            android:text="@string/stop" />
+            android:background="@drawable/round_button_stop"
+            android:text="@string/stop"
+            android:textColor="#ffffff"
+            android:layout_marginHorizontal="12dp"
+            android:layout_gravity="center_vertical"/>
 
         <Button
             android:id="@+id/buttonResume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:textSize="20dp"
-            android:background="@drawable/customborder_gray_background"
-            android:text="@string/reset" />
+            android:background="@drawable/round_button_reset"
+            android:text="@string/reset"
+            android:textColor="#ffffff"
+            android:layout_marginHorizontal="12dp"
+            android:layout_gravity="center_vertical"/>
 
     </LinearLayout>
 
 
+    //Edit time Button
+    <Button
+        android:id="@+id/button_enter_time"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:textSize="20dp"
+        android:background="@drawable/customborder_gray_background"
+        android:text="@string/enter_time" />
+
+    //Bottom Clock
     <LinearLayout
         android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
@@ -89,19 +106,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textColor="#07aec1"
+            android:textColor="#333333"
             android:textSize="80dp"
             android:textStyle="bold" />
 
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/button_enter_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="20dp"
-        android:background="@drawable/customborder_gray_background"
-        android:text="@string/enter_time" />
 </LinearLayout>

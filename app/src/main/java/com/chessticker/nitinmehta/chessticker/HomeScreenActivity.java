@@ -134,7 +134,7 @@ public class HomeScreenActivity extends Activity {
                 resetButton.setEnabled(true);
                 topTimerLayout.setEnabled(false);
                 bottomTimerLayout.setEnabled(false);
-                buttonEnterTime.setEnabled(true);
+                buttonEnterTime.setEnabled(false);
                 bottomTimer.cancel();
                 topTimer.cancel();
                 isTimeRunning = false;

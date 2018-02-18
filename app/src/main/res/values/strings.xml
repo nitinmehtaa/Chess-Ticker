@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Chess Ticker</string>
-    <string name="start">START</string>
-    <string name="stop">STOP</string>
-    <string name="reset">RESET</string>
-    <string name="enter_time">EDIT TIME</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="reset">Reset</string>
+    <string name="enter_time">Edit Time</string>
 </resources>

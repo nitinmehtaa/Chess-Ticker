@@ -3,25 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="500dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Time"
-        android:textSize="10dp"/>
+        android:text="Enter Time in Minutes"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"/>
 
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
-        android:inputType="number"/>
+        android:textSize="20dp"
+        android:inputType="number"
+        android:backgroundTint="#000000"
+        android:cursorVisible="false"/>
 
     <Button
         android:id="@+id/button_set_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SET TIME"/>
+        android:text="SET TIME"
+        android:background="#d9d9d9"/>
 
 </LinearLayout>
