@@ -29,6 +29,8 @@ public class HomeScreenActivity extends Activity {
     public final int INITIAL_TIME_IN_MINUTES = 6;
     public String initialTime;
     public long currentStartTime = 6;
+    public long maxMinutesAllowed = 1440L;
+    public long minMinutesAllowed = 1L;
 
     //Convert minutes into HH:MM:SS Format
     private String convertTime(long time) {
@@ -57,17 +59,29 @@ public class HomeScreenActivity extends Activity {
         setTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //To check empty string
                 if (!setTime.getText().toString().isEmpty()) {
-                    currentStartTime = Long.parseLong(setTime.getText().toString());
-                    String finalTimeTobeShown = convertTime(currentStartTime);
-                    textView1.setText(finalTimeTobeShown);
-                    textView2.setText(finalTimeTobeShown);
-                    Toast.makeText(HomeScreenActivity.this,
-                            "Time Updated",
-                            Toast.LENGTH_SHORT).show();
-                    resetTimers();
-                    dialog.cancel();
-                    Crashlytics.getInstance().core.logException(new Exception("Crash at onClick of set time button on dialog"));
+
+                    //To check minutes should be in between 1 and 1440
+                     long number = Long.parseLong(setTime.getText().toString());
+                    if (number > maxMinutesAllowed || number < minMinutesAllowed) {
+                        Toast.makeText(HomeScreenActivity.this,
+                                "Time should not be less than 1 minute or more than 24 Hours, Try again ",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        currentStartTime = Long.parseLong(setTime.getText().toString());
+                        String finalTimeTobeShown = convertTime(currentStartTime);
+                        textView1.setText(finalTimeTobeShown);
+                        textView2.setText(finalTimeTobeShown);
+                        Toast.makeText(HomeScreenActivity.this,
+                                "Time Updated",
+                                Toast.LENGTH_SHORT).show();
+                        resetTimers();
+                        dialog.cancel();
+                        Crashlytics.getInstance().core.logException(new Exception("Crash at onClick of set time button on dialog"));
+                    }
+
                 } else {
                     Toast.makeText(HomeScreenActivity.this,
                             "Please enter Minutes",

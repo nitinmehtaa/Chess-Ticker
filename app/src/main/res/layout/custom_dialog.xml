@@ -10,22 +10,26 @@
         android:layout_height="wrap_content"
         android:text="Enter Time in Minutes"
         android:textSize="20dp"
-        android:layout_marginLeft="10dp"/>
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:maxLength="4"
         android:inputType="number"
         android:backgroundTint="#000000"
-        android:cursorVisible="false"/>
+        android:cursorVisible="false"
+        android:layout_marginTop="5dp"/>
 
     <Button
         android:id="@+id/button_set_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SET TIME"
-        android:background="#d9d9d9"/>
+        android:background="#d9d9d9"
+        android:textSize="20dp"/>
 
 </LinearLayout>
