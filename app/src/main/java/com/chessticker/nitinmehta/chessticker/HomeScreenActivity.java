@@ -43,8 +43,7 @@ public class HomeScreenActivity extends Activity {
                 TimeUnit.HOURS.toHours(hour) ,
                 TimeUnit.MINUTES.toMinutes(minutes),
                 TimeUnit.SECONDS.toSeconds(seconds));
-        Crashlytics.getInstance().core.logException(new Exception("Crash at converting minutes to HH:MM:SS"));
-        return finalTime;
+            return finalTime;
     }
 
     //Dialog to set Time
@@ -59,7 +58,6 @@ public class HomeScreenActivity extends Activity {
         setTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //To check empty string
                 if (!setTime.getText().toString().isEmpty()) {
 
@@ -79,7 +77,6 @@ public class HomeScreenActivity extends Activity {
                                 Toast.LENGTH_SHORT).show();
                         resetTimers();
                         dialog.cancel();
-                        Crashlytics.getInstance().core.logException(new Exception("Crash at onClick of set time button on dialog"));
                     }
 
                 } else {
@@ -93,9 +90,12 @@ public class HomeScreenActivity extends Activity {
     }
 
     private void resetTimers() {
+        try {
         bottomTimer = new BottomCounterClass(currentStartTime * 60000,1000);
         topTimer = new TopCounterClass(currentStartTime * 60000,1000);
-        Crashlytics.getInstance().core.logException(new Exception("Crash at resetting the timers"));
+        } catch (Exception e){
+            Crashlytics.getInstance().core.logException(e);
+        }
     }
 
     @Override
@@ -126,6 +126,7 @@ public class HomeScreenActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+                try {
                 buttonEnterTime.setEnabled(false);
                 startButton.setEnabled(false);
                 stopButton.setEnabled(true);
@@ -135,14 +136,16 @@ public class HomeScreenActivity extends Activity {
                 bottomTimer.start();
                 isTimeRunning = true;
                 bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
-                Crashlytics.getInstance().core.logException(new Exception("Crash at start button"));
-
+                } catch (Exception e){
+                    Crashlytics.getInstance().core.logException(e);
+                }
             }
         });
 
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
                 startButton.setEnabled(false);
                 stopButton.setEnabled(false);
                 resetButton.setEnabled(true);
@@ -154,14 +157,16 @@ public class HomeScreenActivity extends Activity {
                 isTimeRunning = false;
                 topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                 bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
-                Crashlytics.getInstance().core.logException(new Exception("Crash at stop button"));
+                } catch(Exception e){
+                    Crashlytics.getInstance().core.logException(e);
+                }
             }
         });
 
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                try {
                 startButton.setEnabled(true);
                 stopButton.setEnabled(false);
                 resetButton.setEnabled(false);
@@ -175,7 +180,9 @@ public class HomeScreenActivity extends Activity {
                 isTimeRunning = false;
                 topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
                 bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
-                Crashlytics.getInstance().core.logException(new Exception("Crash at Reset button"));
+                } catch (Exception e){
+                    Crashlytics.getInstance().core.logException(e);
+                }
             }
         });
 
@@ -183,6 +190,7 @@ public class HomeScreenActivity extends Activity {
         bottomTimerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
                 bottomTimerLayout.setEnabled(false);
                 topTimerLayout.setEnabled(true);
                 bottomTimer.pause();
@@ -195,7 +203,9 @@ public class HomeScreenActivity extends Activity {
                     topTimer.resume();
                     topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                 }
-                Crashlytics.getInstance().core.logException(new Exception("Crash at onClick of Bottom timer"));
+                } catch (Exception e){
+                    Crashlytics.getInstance().core.logException(e);
+                }
             }
         });
 
@@ -203,6 +213,7 @@ public class HomeScreenActivity extends Activity {
         topTimerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
                 topTimerLayout.setEnabled(false);
                 bottomTimerLayout.setEnabled(true);
                 topTimer.pause();
@@ -216,7 +227,9 @@ public class HomeScreenActivity extends Activity {
                     bottomTimer.resume();
                     bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                 }
-                Crashlytics.getInstance().core.logException(new Exception("Crash at onClick of Top timer"));
+                } catch (Exception e){
+                    Crashlytics.getInstance().core.logException(e);
+                }
             }
         });
 
@@ -224,8 +237,11 @@ public class HomeScreenActivity extends Activity {
         buttonEnterTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
                 showEditTimeDialog();
-                Crashlytics.getInstance().core.logException(new Exception("Crash at Edit Time button"));
+                } catch (Exception e) {
+                    Crashlytics.getInstance().core.logException(e);
+                }
             }
         });
     }
@@ -252,44 +268,46 @@ public class HomeScreenActivity extends Activity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            long millis = millisUntilFinished;
-            String hms = String.format("%02d:%02d:%02d",
-                    TimeUnit.MILLISECONDS.toHours(millis),
-                    TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                    TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-            textView1.setText(hms);
-            millisLeft = millisUntilFinished;
-            Crashlytics.getInstance().core.logException(new Exception("Crash at onTick of BottomCounter"));
+            try {
+                long millis = millisUntilFinished;
+                String hms = String.format("%02d:%02d:%02d",
+                        TimeUnit.MILLISECONDS.toHours(millis),
+                        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                        TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                textView1.setText(hms);
+                millisLeft = millisUntilFinished;
+            } catch (Exception e){
+                Crashlytics.getInstance().core.logException(e);
+            }
         }
 
         @Override
         public void onFinish() {
-            Vibrator v = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-            v.vibrate(500);
-            Toast.makeText(HomeScreenActivity.this, "Game Over! Player 2 Wins", Toast.LENGTH_SHORT).show();
-            textView1.setText(initialTime);
-            textView2.setText(initialTime);
-            Crashlytics.getInstance().core.logException(new Exception("Crash at onFinish of bottom counter"));
+            try {
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                v.vibrate(500);
+                Toast.makeText(HomeScreenActivity.this, "Game Over! Player 2 Wins", Toast.LENGTH_SHORT).show();
+                textView1.setText(initialTime);
+                textView2.setText(initialTime);
+            } catch (Exception e){
+                Crashlytics.getInstance().core.logException(e);
+            }
         }
 
         @Override
         public long pause() {
-            Crashlytics.getInstance().core.logException(new Exception("Crash at onPause of bottom Counter"));
             return super.pause();
         }
 
         @Override
         public long resume() {
-            Crashlytics.getInstance().core.logException(new Exception("Crash at onResume of bottom Counter"));
             return super.resume();
         }
     }
 
     //CountDownTimer class for top layout
     public class TopCounterClass extends CustomCountDownTimer {
-
         private long millisLeft = 0;
-
         public TopCounterClass(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
             this.millisLeft = millisInFuture;
@@ -297,35 +315,40 @@ public class HomeScreenActivity extends Activity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            long millis = millisUntilFinished;
-            String hms = String.format("%02d:%02d:%02d",
-                    TimeUnit.MILLISECONDS.toHours(millis),
-                    TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                    TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-            textView2.setText(hms);
-            millisLeft = millisUntilFinished;
-            Crashlytics.getInstance().core.logException(new Exception("Crash at onTick of Top counter"));
+            try {
+                long millis = millisUntilFinished;
+                String hms = String.format("%02d:%02d:%02d",
+                        TimeUnit.MILLISECONDS.toHours(millis),
+                        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                        TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                textView2.setText(hms);
+                millisLeft = millisUntilFinished;
+            } catch (Exception e){
+                Crashlytics.getInstance().core.logException(e);
+            }
         }
 
         @Override
         public void onFinish() {
+            try {
             Vibrator v = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
             v.vibrate(500);
             Toast.makeText(HomeScreenActivity.this, "Game Over! Player 1 Wins", Toast.LENGTH_SHORT).show();
             textView1.setText(initialTime);
             textView2.setText(initialTime);
-            Crashlytics.getInstance().core.logException(new Exception("Crash at onFinish of Top counter"));
+            } catch (Exception e) {
+                Crashlytics.getInstance().core.logException(e);
+            }
+
         }
 
         @Override
         public long pause() {
-            Crashlytics.getInstance().core.logException(new Exception("Crash at onPause of top Counter"));
             return super.pause();
         }
 
         @Override
         public long resume() {
-            Crashlytics.getInstance().core.logException(new Exception("Crash at onResume of top Counter"));
             return super.resume();
         }
     }
