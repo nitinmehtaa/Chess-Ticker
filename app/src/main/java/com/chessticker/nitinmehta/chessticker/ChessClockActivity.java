@@ -17,7 +17,7 @@ import io.fabric.sdk.android.Fabric;
 import java.util.concurrent.TimeUnit;
 
 
-public class HomeScreenActivity extends Activity {
+public class ChessClockActivity extends Activity {
 
     TopCounterClass topTimer;
     BottomCounterClass bottomTimer;
@@ -49,7 +49,7 @@ public class HomeScreenActivity extends Activity {
     //Dialog to set Time
     private void showEditTimeDialog(){
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-        View mView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
+        View mView = getLayoutInflater().inflate(R.layout.edit_time_dialog, null);
         final EditText setTime = (EditText) mView.findViewById(R.id.edit_text);
         Button setTimeButton = (Button) mView.findViewById(R.id.button_set_time);
         mBuilder.setView(mView);
@@ -64,7 +64,7 @@ public class HomeScreenActivity extends Activity {
                     //To check minutes should be in between 1 and 1440
                      long number = Long.parseLong(setTime.getText().toString());
                     if (number > maxMinutesAllowed || number < minMinutesAllowed) {
-                        Toast.makeText(HomeScreenActivity.this,
+                        Toast.makeText(ChessClockActivity.this,
                                 "Time should not be less than 1 minute or more than 24 Hours, Try again ",
                                 Toast.LENGTH_LONG).show();
                     } else {
@@ -72,7 +72,7 @@ public class HomeScreenActivity extends Activity {
                         String finalTimeTobeShown = convertTime(currentStartTime);
                         textView1.setText(finalTimeTobeShown);
                         textView2.setText(finalTimeTobeShown);
-                        Toast.makeText(HomeScreenActivity.this,
+                        Toast.makeText(ChessClockActivity.this,
                                 "Time Updated",
                                 Toast.LENGTH_SHORT).show();
                         resetTimers();
@@ -80,7 +80,7 @@ public class HomeScreenActivity extends Activity {
                     }
 
                 } else {
-                    Toast.makeText(HomeScreenActivity.this,
+                    Toast.makeText(ChessClockActivity.this,
                             "Please enter Minutes",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -102,7 +102,7 @@ public class HomeScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.chess_clock_activity);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //To keep screen always ON
         findViews();
 
@@ -286,7 +286,7 @@ public class HomeScreenActivity extends Activity {
             try {
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(500);
-                Toast.makeText(HomeScreenActivity.this, "Game Over! Player 2 Wins", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChessClockActivity.this, "Game Over! Player 2 Wins", Toast.LENGTH_SHORT).show();
                 textView1.setText(initialTime);
                 textView2.setText(initialTime);
             } catch (Exception e){
@@ -333,7 +333,7 @@ public class HomeScreenActivity extends Activity {
             try {
             Vibrator v = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
             v.vibrate(500);
-            Toast.makeText(HomeScreenActivity.this, "Game Over! Player 1 Wins", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ChessClockActivity.this, "Game Over! Player 1 Wins", Toast.LENGTH_SHORT).show();
             textView1.setText(initialTime);
             textView2.setText(initialTime);
             } catch (Exception e) {
