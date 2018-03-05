@@ -6,7 +6,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -102,6 +104,9 @@ public class ChessClockActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.chess_clock_activity);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //To keep screen always ON
         findViews();
@@ -135,7 +140,6 @@ public class ChessClockActivity extends Activity {
                 bottomTimerLayout.setEnabled(true);
                 bottomTimer.start();
                 isTimeRunning = true;
-                bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                 } catch (Exception e){
                     Crashlytics.getInstance().core.logException(e);
                 }
@@ -155,8 +159,6 @@ public class ChessClockActivity extends Activity {
                 bottomTimer.cancel();
                 topTimer.cancel();
                 isTimeRunning = false;
-                topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
-                bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                 } catch(Exception e){
                     Crashlytics.getInstance().core.logException(e);
                 }
@@ -178,8 +180,6 @@ public class ChessClockActivity extends Activity {
                 textView1.setText(initialTime);
                 textView2.setText(initialTime);
                 isTimeRunning = false;
-                topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
-                bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
                 } catch (Exception e){
                     Crashlytics.getInstance().core.logException(e);
                 }
@@ -194,14 +194,14 @@ public class ChessClockActivity extends Activity {
                 bottomTimerLayout.setEnabled(false);
                 topTimerLayout.setEnabled(true);
                 bottomTimer.pause();
-                bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
+//                bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
                 if(isTimeRunning) {
                     topTimer.start();
-                    topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
+//                    topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                     isTimeRunning = false;
                 } else {
                     topTimer.resume();
-                    topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
+//                    topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                 }
                 } catch (Exception e){
                     Crashlytics.getInstance().core.logException(e);
@@ -218,14 +218,14 @@ public class ChessClockActivity extends Activity {
                 bottomTimerLayout.setEnabled(true);
                 topTimer.pause();
                 bottomTimer.resume();
-                topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
+//                topTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_gray_background));
                 if(isTimeRunning) {
                     bottomTimer.start();
-                    bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
+//                    bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                     isTimeRunning = false;
                 } else {
                     bottomTimer.resume();
-                    bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
+//                    bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.customborder_white_background));
                 }
                 } catch (Exception e){
                     Crashlytics.getInstance().core.logException(e);

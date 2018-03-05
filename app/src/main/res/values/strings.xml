@@ -4,4 +4,5 @@
     <string name="stop">Stop</string>
     <string name="reset">Reset</string>
     <string name="enter_time">Edit Time</string>
+    <string name="choose_game">Choose Game</string>
 </resources>

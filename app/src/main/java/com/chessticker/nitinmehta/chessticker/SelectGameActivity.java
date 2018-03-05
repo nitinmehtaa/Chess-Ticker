@@ -54,29 +54,17 @@ public class SelectGameActivity extends AppCompatActivity implements ClickListen
         data = new GameData("Dice Roll", "Roll dice with a single tap on screen to play any game", thumbImages[1]);
         gameDataList.add(data);
 
-        data = new GameData("Direction", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever ", thumbImages[2]);
-        gameDataList.add(data);
-
-        data = new GameData("Toss Coin", "Toss coin with a single tap on screen", thumbImages[3]);
-        gameDataList.add(data);
-
-        data = new GameData("Dumb Charads", "Get random movie names for playing dumb charads", thumbImages[1]);
-        gameDataList.add(data);
-
-        data = new GameData("Tambola Housie", "Get unique numbers from 1 to 100 for playing classic Tambola Housie", thumbImages[2]);
-        gameDataList.add(data);
-
-        data = new GameData("FRGTHY", "asdajsdjkadefrgthyjukihsdj", thumbImages[3]);
-        gameDataList.add(data);
-
-        data = new GameData("Dice Roll", "A virtual Dice", thumbImages[1]);
-        gameDataList.add(data);
-
-        data = new GameData("ABCD", "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambl", thumbImages[2]);
-        gameDataList.add(data);
-
-        data = new GameData("FRGTHY", "asdajsdjkadefrgthyjukihsdj", thumbImages[3]);
-        gameDataList.add(data);
+//        data = new GameData("Direction", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever ", thumbImages[2]);
+//        gameDataList.add(data);
+//
+//        data = new GameData("Toss Coin", "Toss coin with a single tap on screen", thumbImages[3]);
+//        gameDataList.add(data);
+//
+//        data = new GameData("Dumb Charads", "Get random movie names for playing dumb charads", thumbImages[1]);
+//        gameDataList.add(data);
+//
+//        data = new GameData("Tambola Housie", "Get unique numbers from 1 to 100 for playing classic Tambola Housie", thumbImages[2]);
+//        gameDataList.add(data);
 
         mAdapter.notifyDataSetChanged();
     }

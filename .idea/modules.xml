@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Chess-Ticker.iml" filepath="$PROJECT_DIR$/Chess-Ticker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ChessTicker.iml" filepath="$PROJECT_DIR$/ChessTicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
