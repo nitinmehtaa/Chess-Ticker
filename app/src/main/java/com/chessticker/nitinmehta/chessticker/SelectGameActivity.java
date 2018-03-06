@@ -1,5 +1,6 @@
 package com.chessticker.nitinmehta.chessticker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +23,11 @@ import java.util.List;
  * Created by NitinMehta on 27/02/2018.
  */
 
-public class SelectGameActivity extends AppCompatActivity implements ClickListener{
+public class SelectGameActivity extends AppCompatActivity{
     private List<GameData> gameDataList = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private SelectGameAdapter mAdapter;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +38,6 @@ public class SelectGameActivity extends AppCompatActivity implements ClickListen
 
         mRecyclerView = (RecyclerView)findViewById(R.id.select_game_recycler_view);
         mAdapter = new SelectGameAdapter(gameDataList);
-
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -41,36 +46,17 @@ public class SelectGameActivity extends AppCompatActivity implements ClickListen
     }
 
     private void prepareGameData() {
-        int[] thumbImages = new int[] {
-                R.drawable.round_button_reset,
-                R.drawable.round_button_start,
-                R.drawable.round_button_stop,
-                R.drawable.round_button_reset
-        };
 
-        GameData data = new GameData("Chess Clock", "A chess clock in android to help you track time on your moves", thumbImages[0]);
+        ArrayList<Integer> thumbImages = new ArrayList<Integer>();
+        thumbImages.add(R.drawable.ic_chess);
+        thumbImages.add(R.drawable.ic_dice);
+
+        GameData data = new GameData("Chess Clock", "A chess clock in android to help you track time on your moves", thumbImages.get(0));
         gameDataList.add(data);
 
-        data = new GameData("Dice Roll", "Roll dice with a single tap on screen to play any game", thumbImages[1]);
+        data = new GameData("Dice Roll", "Roll dice with a single tap on screen to play any game", thumbImages.get(1));
         gameDataList.add(data);
-
-//        data = new GameData("Direction", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever ", thumbImages[2]);
-//        gameDataList.add(data);
-//
-//        data = new GameData("Toss Coin", "Toss coin with a single tap on screen", thumbImages[3]);
-//        gameDataList.add(data);
-//
-//        data = new GameData("Dumb Charads", "Get random movie names for playing dumb charads", thumbImages[1]);
-//        gameDataList.add(data);
-//
-//        data = new GameData("Tambola Housie", "Get unique numbers from 1 to 100 for playing classic Tambola Housie", thumbImages[2]);
-//        gameDataList.add(data);
 
         mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void itemClicked(GameData gameDataItem) {
-
     }
 }

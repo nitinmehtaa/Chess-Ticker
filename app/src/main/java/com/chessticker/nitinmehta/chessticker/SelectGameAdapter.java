@@ -20,15 +20,6 @@ import java.util.List;
 public class SelectGameAdapter extends RecyclerView.Adapter<SelectGameAdapter.MyViewHolder> {
     private List<GameData> gameDataList;
     private Context mContext;
-    private ClickListener onItemClickListener;
-
-    public ClickListener getOnItemClickListener() {
-        return onItemClickListener;
-    }
-
-    public void setOnItemClickListener(ClickListener onItemClickListener) {
-            this.onItemClickListener = onItemClickListener;
-    }
 
     public SelectGameAdapter(Context context, List<GameData> gameDataList){
         this.gameDataList = gameDataList;
@@ -46,7 +37,6 @@ public class SelectGameAdapter extends RecyclerView.Adapter<SelectGameAdapter.My
             gameSubtitle = (TextView)view.findViewById(R.id.game_subtitle);
             gameThumbnail = (ImageView)view.findViewById(R.id.game_thumbnail);
             startButton = (TextView)view.findViewById(R.id.start_button);
-
         }
     }
 
@@ -62,7 +52,7 @@ public class SelectGameAdapter extends RecyclerView.Adapter<SelectGameAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         GameData data = gameDataList.get(position);
         holder.gameTitle.setText(data.getGameTitle());
         holder.gameSubtitle.setText(data.getGamesubTitle());
@@ -70,7 +60,11 @@ public class SelectGameAdapter extends RecyclerView.Adapter<SelectGameAdapter.My
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.getContext().startActivity(new Intent(v.getContext(), ChessClockActivity.class));
+                if (position == 0){
+                    v.getContext().startActivity(new Intent(v.getContext(), ChessClockActivity.class));
+                } else if (position == 1) {
+                    v.getContext().startActivity(new Intent(v.getContext(), DiceRollActivity.class));
+                }
             }
         });
     }

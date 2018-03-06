@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ndroid="http://schemas.android.com/apk/res-auto"
     package="com.chessticker.nitinmehta.chessticker">
 
     <!--Permissions-->
@@ -14,14 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SelectGameActivity">
+        <activity android:name=".SelectGameActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChessClockActivity"/>
+        <activity android:name=".ChessClockActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".DiceRollActivity"
+            android:screenOrientation="portrait"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="df832f113fa1abda9246281f207ceec2cef27ed2" />
