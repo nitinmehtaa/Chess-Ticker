@@ -12,10 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +23,6 @@ public class SelectGameActivity extends AppCompatActivity{
     private List<GameData> gameDataList = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private SelectGameAdapter mAdapter;
-    private ImageView imageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

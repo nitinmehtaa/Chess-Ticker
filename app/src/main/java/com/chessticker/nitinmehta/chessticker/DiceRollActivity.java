@@ -18,29 +18,27 @@ import java.util.Random;
 public class DiceRollActivity extends Activity {
 
     public static final Random RANDOM = new Random();
-    private Button rollDiceButton;
-    private ImageView imageView1;
+    private Button tapButton1, tapButton2, tapButton3;
+    private ImageView image1, image2, image3;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.dice_roll_activity);
-        rollDiceButton = (Button)findViewById(R.id.tapButton);
-        imageView1 = (ImageView)findViewById(R.id.imageView1);
+        tapButton1 = (Button)findViewById(R.id.button1);
+        tapButton2 = (Button)findViewById(R.id.button2);
+        tapButton3 = (Button)findViewById(R.id.button3);
 
-        rollDiceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int value1 = randomDiceValue();
-
-                int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.chessticker.nitinmehta.chessticker");
-
-                imageView1.setImageResource(res1);
-            }
-        });
+//        rollDiceButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int value1 = randomDiceValue();
+//
+//                int res1 = getResources().getIdentifier("ic_dice_" + value1, "drawable", "com.chessticker.nitinmehta.chessticker");
+//
+//                imageView1.setImageResource(res1);
+//            }
+//        });
     }
 
     public static int randomDiceValue(){
