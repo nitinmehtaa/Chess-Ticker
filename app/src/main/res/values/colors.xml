@@ -7,4 +7,6 @@
     <color name="navbarColor">#000000</color>
     <color name="whiteColor">#ffffff</color>
     <color name="grayColor">#bfbfbf</color>
+    <color name="purpleColor">#4744AC</color>
+    <color name="lightPurpleColor">#A19FE6</color>
 </resources>
