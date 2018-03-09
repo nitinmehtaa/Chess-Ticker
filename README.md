@@ -1,2 +1,2 @@
-# Chess-Ticker
-A Chess clock Android App
+# All in one Game - Utility App
+A utility android app for indoor games
