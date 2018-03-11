@@ -2,14 +2,15 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#e4e7e7">
+    android:background="#ffffff"
+    android:gravity="center">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Time in Minutes"
+        android:text="Enter your time in Minutes"
         android:textSize="20dp"
         android:textAlignment="center"
         android:layout_marginTop="10dp"/>
@@ -18,22 +19,27 @@
         android:id="@+id/edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="50sp"
         android:maxLength="4"
         android:inputType="number"
-        android:backgroundTint="#000000"
+        android:backgroundTint="@color/purpleColor"
         android:cursorVisible="false"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:textAlignment="center"/>
 
     <Button
         android:id="@+id/button_set_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SET TIME"
+        android:text="Done"
         android:textColor="#ffffff"
-        android:background="@drawable/round_start_button"
-        android:layout_margin="15dp"
         android:textSize="20dp"
-        android:elevation="10dp"/>
+        android:elevation="10dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_start_button"/>
 
 </LinearLayout>

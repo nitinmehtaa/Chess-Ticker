@@ -9,4 +9,6 @@
     <color name="grayColor">#bfbfbf</color>
     <color name="purpleColor">#4744AC</color>
     <color name="lightPurpleColor">#A19FE6</color>
+    <color name="enabledWatchColor">#333333</color>
+    <color name="disabledWatchcolor">#999999</color>
 </resources>

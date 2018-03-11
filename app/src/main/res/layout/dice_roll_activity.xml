@@ -72,31 +72,36 @@
 
     //Bottom layout
         <LinearLayout
+            android:id="@+id/dice_base_layout"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
             <ImageView
                 android:id="@+id/diceImage1"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
+                android:layout_marginLeft="2dp"
                 android:src="@drawable/ic_dice_1"/>
 
             <ImageView
                 android:id="@+id/diceImage2"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:src="@drawable/ic_dice_4"/>
 
             <ImageView
                 android:id="@+id/diceImage3"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/ic_dice_6"/>
 
     </LinearLayout>

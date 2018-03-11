@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.Random;
 
@@ -20,6 +21,7 @@ public class DiceRollActivity extends Activity {
     public static final Random RANDOM = new Random();
     private Button tapButton1, tapButton2, tapButton3, tapRollDice;
     private ImageView image1, image2, image3;
+    private LinearLayout diceLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class DiceRollActivity extends Activity {
         image2 = (ImageView) findViewById(R.id.diceImage2);
         image3 = (ImageView) findViewById(R.id.diceImage3);
         tapRollDice = (Button) findViewById(R.id.tapButton);
+        diceLayout = (LinearLayout)findViewById(R.id.dice_base_layout);
 
         image1.setVisibility(View.VISIBLE);
         image2.setVisibility(View.GONE);
@@ -66,6 +69,7 @@ public class DiceRollActivity extends Activity {
                 image1.setVisibility(View.VISIBLE);
                 image2.setVisibility(View.GONE);
                 image3.setVisibility(View.GONE);
+                diceLayout.setOrientation(LinearLayout.HORIZONTAL);
 
                 tapButton1.setBackground(getResources().getDrawable(R.drawable.custom_dice_button_border));
                 tapButton1.setTextColor(getResources().getColor(R.color.purpleColor));
@@ -84,6 +88,7 @@ public class DiceRollActivity extends Activity {
                 image1.setVisibility(View.VISIBLE);
                 image2.setVisibility(View.VISIBLE);
                 image3.setVisibility(View.GONE);
+                diceLayout.setOrientation(LinearLayout.HORIZONTAL);
                 tapButton2.setBackground(getResources().getDrawable(R.drawable.custom_dice_button_border));
                 tapButton2.setTextColor(getResources().getColor(R.color.purpleColor));
 
@@ -101,6 +106,8 @@ public class DiceRollActivity extends Activity {
                 image1.setVisibility(View.VISIBLE);
                 image2.setVisibility(View.VISIBLE);
                 image3.setVisibility(View.VISIBLE);
+
+                diceLayout.setOrientation(LinearLayout.VERTICAL);
                 tapButton3.setBackground(getResources().getDrawable(R.drawable.custom_dice_button_border));
                 tapButton3.setTextColor(getResources().getColor(R.color.purpleColor));
 

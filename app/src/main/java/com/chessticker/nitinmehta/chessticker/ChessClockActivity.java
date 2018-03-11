@@ -51,10 +51,9 @@ public class ChessClockActivity extends Activity {
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.edit_time_dialog, null);
         final EditText setTime = (EditText) mView.findViewById(R.id.edit_text);
-        Button setTimeButton = (Button) mView.findViewById(R.id.button_set_time);
+        final Button setTimeButton = (Button) mView.findViewById(R.id.button_set_time);
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
-
         setTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +104,8 @@ public class ChessClockActivity extends Activity {
         setContentView(R.layout.chess_clock_activity);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //To keep screen always ON
         findViews();
-
+        textView1.setTextColor(getResources().getColor(R.color.disabledWatchcolor));
+        textView2.setTextColor(getResources().getColor(R.color.disabledWatchcolor));
 
         //Buttons state on start of Application
         startButton.setEnabled(true);
@@ -137,6 +137,8 @@ public class ChessClockActivity extends Activity {
                 bottomTimer.start();
                 isTimeRunning = true;
                 bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.custom_clock_border));
+                textView1.setTextColor(getResources().getColor(R.color.enabledWatchColor));
+                textView2.setTextColor(getResources().getColor(R.color.disabledWatchcolor));
                 } catch (Exception e){
                     Crashlytics.getInstance().core.logException(e);
                 }
@@ -156,6 +158,8 @@ public class ChessClockActivity extends Activity {
                 bottomTimer.cancel();
                 topTimer.cancel();
                 isTimeRunning = false;
+                textView1.setTextColor(getResources().getColor(R.color.enabledWatchColor));
+                textView2.setTextColor(getResources().getColor(R.color.enabledWatchColor));
                 } catch(Exception e){
                     Crashlytics.getInstance().core.logException(e);
                 }
@@ -178,6 +182,8 @@ public class ChessClockActivity extends Activity {
                 topTimer.cancel();
                 textView1.setText(initialTime);
                 textView2.setText(initialTime);
+                textView1.setTextColor(getResources().getColor(R.color.disabledWatchcolor));
+                textView2.setTextColor(getResources().getColor(R.color.disabledWatchcolor));
                 isTimeRunning = false;
                 } catch (Exception e){
                     Crashlytics.getInstance().core.logException(e);
@@ -198,11 +204,15 @@ public class ChessClockActivity extends Activity {
                     topTimer.start();
                     topTimerLayout.setBackground(getResources().getDrawable(R.drawable.custom_clock_border));
                     bottomTimerLayout.setBackgroundColor(getResources().getColor(R.color.whiteColor));
+                    textView1.setTextColor(getResources().getColor(R.color.disabledWatchcolor));
+                    textView2.setTextColor(getResources().getColor(R.color.enabledWatchColor));
                     isTimeRunning = false;
                 } else {
                     topTimer.resume();
                     bottomTimerLayout.setBackgroundColor(getResources().getColor(R.color.whiteColor));
                     topTimerLayout.setBackground(getResources().getDrawable(R.drawable.custom_clock_border));
+                    textView1.setTextColor(getResources().getColor(R.color.disabledWatchcolor));
+                    textView2.setTextColor(getResources().getColor(R.color.enabledWatchColor));
                 }
                 } catch (Exception e){
                     Crashlytics.getInstance().core.logException(e);
@@ -224,11 +234,15 @@ public class ChessClockActivity extends Activity {
                     bottomTimer.start();
                     bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.custom_clock_border));
                     topTimerLayout.setBackgroundColor(getResources().getColor(R.color.whiteColor));
+                    textView1.setTextColor(getResources().getColor(R.color.enabledWatchColor));
+                    textView2.setTextColor(getResources().getColor(R.color.disabledWatchcolor));
                     isTimeRunning = false;
                 } else {
                     bottomTimer.resume();
                     topTimerLayout.setBackgroundColor(getResources().getColor(R.color.whiteColor));
                     bottomTimerLayout.setBackground(getResources().getDrawable(R.drawable.custom_clock_border));
+                    textView1.setTextColor(getResources().getColor(R.color.enabledWatchColor));
+                    textView2.setTextColor(getResources().getColor(R.color.disabledWatchcolor));
                 }
                 } catch (Exception e){
                     Crashlytics.getInstance().core.logException(e);

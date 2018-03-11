@@ -91,7 +91,7 @@
                 android:id="@+id/button_enter_time"
                 android:layout_width="170dp"
                 android:layout_height="90dp"
-                android:background="@drawable/edit" />
+                android:background="@drawable/edit"/>
         </LinearLayout>
 
     </LinearLayout>
