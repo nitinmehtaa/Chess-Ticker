@@ -6,12 +6,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 /**
  * Created by NitinMehta on 27/02/2018.
@@ -20,6 +25,7 @@ import java.util.List;
 public class SelectGameAdapter extends RecyclerView.Adapter<SelectGameAdapter.MyViewHolder> {
     private List<GameData> gameDataList;
     private Context mContext;
+    int delayAnimate = 300;
 
     public SelectGameAdapter(Context context, List<GameData> gameDataList){
         this.gameDataList = gameDataList;
